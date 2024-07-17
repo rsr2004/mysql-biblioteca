@@ -1,6 +1,6 @@
 # Base de Dados | Biblioteca - Step by Step
 
-1. O primeiro passo é criar a Base de Dados e as suas tabelas:
+## 1. O primeiro passo é criar a Base de Dados e as suas tabelas:
 
 ```
 DROP DATABASE IF EXISTS `biblioteca`; -- Eliminar a base de dados "biblioteca" se já existir.
@@ -94,7 +94,7 @@ CREATE TABLE EMPRESTIMOS ( -- Criar a tabela "EMPRESTIMOS" com os seus campos:
 );
 ```
 
-2. O segundo passo é inserir os dados nas tabelas anteriormente criadas:
+## 2. O segundo passo é inserir os dados nas tabelas anteriormente criadas:
 
 ```
 INSERT INTO MEMBROS (id_membro, nome, telefone, email) VALUES -- Insere os dados na tabela "MEMBROS".
@@ -252,9 +252,9 @@ INSERT INTO EMPRESTIMOS (id_emprestimo, id_membro, id_copia, data_emprestimo, da
 (13, 4, 10, '2024-02-05', '2024-02-20', NULL, 0.00);  -- Emprestado a Daniel Costa
 ```
 
-3. Agora que já temos a base de dados criada e com dados inseridos, vamos executar umas consultas à base de dados:
+## 3. Agora que já temos a base de dados criada e com dados inseridos, vamos executar umas consultas à base de dados:
 
-3.1. Esta primeira consulta trata-se de verificar que livros têm cópias disponíveis e a que autor os mesmos pertencem.
+### 3.1. Esta primeira consulta trata-se de verificar que livros têm cópias disponíveis e a que autor os mesmos pertencem.
 ```
 -- Os livros 7, 10, 11 e 12 não têm cópias por isso não devem aparecer!!
 
@@ -272,7 +272,7 @@ WHERE
     C.quantidade_em_stock > 0;  -- Verifica se há cópias disponíveis
 ```
 
-3.2 Esta segunda consulta trata-se de verificar que empréstimos de livros foram realiados num determinado período de tempo.
+### 3.2 Esta segunda consulta trata-se de verificar que empréstimos de livros foram realiados num determinado período de tempo.
 
 ```
 -- Devem aparecer os livros com ID: 4,5,6,12 e 13!
@@ -295,7 +295,7 @@ WHERE
 LIMIT 0, 50000;
 ```
 
-3.3. Esta terceira consulta trata-se de verificar que membros realizaram mais do que um empréstimo.
+### 3.3. Esta terceira consulta trata-se de verificar que membros realizaram mais do que um empréstimo.
 
 ```
 -- Devem aparecer o ID 4 e 1 com 3 copias e 2 copias respetivamente!!
@@ -316,7 +316,7 @@ ORDER BY
     COUNT(E.id_emprestimo) DESC;
 ```
 
-3.4. Esta quarta e última consulta trata-se de listar os livros de uma determinada categoria.
+### 3.4. Esta quarta e última consulta trata-se de listar os livros de uma determinada categoria.
 
 ```
 -- DEVE APARECER O ID 7, 16 e 17
@@ -335,9 +335,9 @@ ORDER BY
     L.titulo;
 ```
 
-4. O quarto passo é inserir na base de dados os triggers:
+## 4. O quarto passo é inserir na base de dados os triggers:
 
-4.1. Este primeiro trigger atualiza a quantidade de stock dos livros consoante a realização de um empréstimo.
+### 4.1. Este primeiro trigger atualiza a quantidade de stock dos livros consoante a realização de um empréstimo.
 
 ```
 DELIMITER //
@@ -355,7 +355,7 @@ END;
 DELIMITER ;
 ```
 
-4.2. Este segundo trigger volta a atualizar a quantidade de stock dos livros quando o mesmo for devolvido.
+### 4.2. Este segundo trigger volta a atualizar a quantidade de stock dos livros quando o mesmo for devolvido.
 
 ```
 DELIMITER //
@@ -375,7 +375,7 @@ END;
 DELIMITER ;
 ```
 
-Para verificar a funcionalidade destes triggers iremos executar o seguinte código:
+#### Para verificar a funcionalidade destes triggers iremos executar o seguinte código:
 
 ```
 -- TESTE DEPOIS DE ATIVAR O TRIGGER:
@@ -399,7 +399,7 @@ WHERE `id_emprestimo` = 14;
 select quantidade_em_stock as CopiasDepoisDaDevolucao from COPIAS where id_copia = 1
 ```
 
-4.3. Este terceiro trigger impede a inserção de um empréstimo se não houver stock de livros.
+### 4.3. Este terceiro trigger impede a inserção de um empréstimo se não houver stock de livros.
 
 ```
 DELIMITER //
@@ -425,7 +425,7 @@ END; //
 DELIMITER ;
 ```
 
-Para verificar a funcionalidade deste trigger iremos executar o seguinte código:
+#### Para verificar a funcionalidade deste trigger iremos executar o seguinte código:
 
 ```
 -- TESTE DEPOIS DE ATIVAR O TRIGGER:
@@ -438,9 +438,9 @@ INSERT INTO EMPRESTIMOS (id_emprestimo, id_membro, id_copia, data_emprestimo, da
 VALUES (14, 1, 8, '2024-07-10', '2024-07-25', NULL, 0.00);  -- DEVE CRIAR O REGISTO!!
 ```
 
-5. O quinto passo é inserir na base de dados os Stored Procedures:
+## 5. O quinto passo é inserir na base de dados os Stored Procedures:
 
-5.1. Este primeiro Stored Procedure serve para registar um novo empréstimo.
+### 5.1. Este primeiro Stored Procedure serve para registar um novo empréstimo.
 
 ```
 DELIMITER //
@@ -481,7 +481,7 @@ END; //
 DELIMITER ;
 ```
 
-Para verificar a funcionalidade deste Stored Procedure iremos executar o seguinte código:
+#### Para verificar a funcionalidade deste Stored Procedure iremos executar o seguinte código:
 
 ```
 -- TESTE DO STORED PROCEDURE:
@@ -492,7 +492,7 @@ CALL registrar_emprestimo(1, 7, '2024-07-15', '2024-07-30', @mensagem);  -- NÃO
 SELECT @mensagem;                                                        -- NÃO DEVE REGISTAR O EMRPESTIMO!!
 ```
 
-5.2. Este segundo Stored Procedure serve para atualizar os dados de um membro da biblioteca.
+### 5.2. Este segundo Stored Procedure serve para atualizar os dados de um membro da biblioteca.
 
 ```
 DELIMITER //
@@ -525,7 +525,7 @@ END; //
 DELIMITER ;
 ```
 
-Para verificar a funcionalidade deste Stored Procedure iremos executar o seguinte código:
+#### Para verificar a funcionalidade deste Stored Procedure iremos executar o seguinte código:
 
 ```
 -- TESTE DO STORED PROCEDURE:
@@ -536,7 +536,7 @@ CALL atualizar_membro(100, 'Nome Inexistente', '0000000000', 'inexistente@email.
 SELECT @mensagem;                                                                                 -- NÃO DEVE ALTERAR OS DADOS
 ```
 
-5.3. Este terceiro Stored Procedure serve para calcular o total de empréstimos realizados durante um determinado período.
+### 5.3. Este terceiro Stored Procedure serve para calcular o total de empréstimos realizados durante um determinado período.
 
 ```
 DELIMITER //
@@ -556,7 +556,7 @@ END; //
 DELIMITER ;
 ```
 
-Para verificar a funcionalidade deste Stored Procedure iremos executar o seguinte código:
+#### Para verificar a funcionalidade deste Stored Procedure iremos executar o seguinte código:
 
 ```
 -- TESTE DO STORED PROCEDURE:
@@ -567,9 +567,9 @@ CALL calcular_total_emprestimos('2024-04-01', '2024-06-30', @total_emprestimos);
 SELECT @total_emprestimos;                                                        -- DEVE DAR 3
 ```
 
-6. O sexto passo é inserir na base de dados um Cursor:
+## 6. O sexto passo é inserir na base de dados um Cursor:
 
-6.1. Este cursor fornece um relatório de todos os livros e quantidade de vezes que foi emprestado durante um determinado período.
+### 6.1. Este cursor fornece um relatório de todos os livros e quantidade de vezes que foi emprestado durante um determinado período.
 
 ```
 DELIMITER //
@@ -632,7 +632,7 @@ END; //
 DELIMITER ;
 ```
 
-Para verificar a funcionalidade deste Cursor iremos executar o seguinte código:
+#### Para verificar a funcionalidade deste Cursor iremos executar o seguinte código:
 
 ```
 -- TESTE DO STORED PROCEDURE:
