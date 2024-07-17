@@ -14,6 +14,7 @@ END; //
 
 DELIMITER ;
 
+-- TESTE DO STORED PROCEDURE:
 CALL calcular_total_emprestimos('2024-01-01', '2024-03-31', @total_emprestimos);  -- DEVE DAR 10
 SELECT @total_emprestimos;                                                        -- DEVE DAR 10
 
