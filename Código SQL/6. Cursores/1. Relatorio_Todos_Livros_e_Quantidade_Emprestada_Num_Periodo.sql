@@ -57,4 +57,5 @@ END; //
 
 DELIMITER ;
 
+-- TESTE DO STORED PROCEDURE:
 CALL relatorio_emprestimos_livros('2024-01-01', '2024-03-31');
