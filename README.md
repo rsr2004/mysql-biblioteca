@@ -1,8 +1,8 @@
 # Base de Dados | Biblioteca
 
-## Objetivo
+## Descrição
 
-Desenvolver um sistema de gestão de uma biblioteca que permita o controlo de informações sobre membros, livros tal como os seus autores, categorias e editoras. Também é usada para gerenciar informações sobre funcionários e empréstimos dos livros.
+Sistema de gestão em MySQL de uma biblioteca que permita o controlo de informações sobre membros, livros tal como os seus autores, categorias e editoras. Também é usada para gerenciar informações sobre funcionários e empréstimos dos livros.
 
 ### Pré-requisitos
 
