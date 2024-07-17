@@ -27,6 +27,7 @@ END; //
 
 DELIMITER ;
 
+-- TESTE DO STORED PROCEDURE:
 CALL atualizar_membro(1, 'Ana Maria Silva', '912345679', 'ana.maria.silva@gmail.com', @mensagem); -- DEVE ALTERAR OS DADOS
 SELECT @mensagem;                                                                                 -- DEVE ALTERAR OS DADOS
 
